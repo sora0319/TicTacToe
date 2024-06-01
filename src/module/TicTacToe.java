@@ -15,14 +15,13 @@ public class TicTacToe implements Playable {
 
     public TicTacToe() {
         this.countTimes = 9;
-        init();
-        showBoard();
-        playGame();
     }
 
     @Override
     public void init() {
         initializeBoard();
+        showBoard();
+        playGame();
     }
 
     @Override

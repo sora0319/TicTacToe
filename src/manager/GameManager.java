@@ -1,5 +1,6 @@
 package manager;
 
+import module.Playable;
 import module.TicTacToe;
 
 import java.io.BufferedReader;
@@ -13,6 +14,7 @@ public class GameManager {
     }
 
     private void initGameManager() throws IOException {
+        Playable playable = null;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int selectNum = -1;
 
@@ -29,7 +31,7 @@ public class GameManager {
 
             switch (selectNum) {
                 case 1:
-                    new TicTacToe();
+                    playable = new TicTacToe();
                     break;
                 case 0:
                     System.out.println("시스템을 종료 합니다.");
@@ -38,6 +40,7 @@ public class GameManager {
                     System.out.println("유효하지 않은 명령 입니다.");
                     break;
             }
+            new GameLauncher(playable).init();
         }
     }
 
@@ -47,4 +50,5 @@ public class GameManager {
         Arrays.stream(GameList.values()).map((x) -> x.getNum() + ". " + x.getGameName()).forEach(result -> sb.append(result).append("\n"));
         System.out.println(sb);
     }
+
 }
