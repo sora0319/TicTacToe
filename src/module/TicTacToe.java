@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class TicTacToe {
+public class TicTacToe implements Playable {
     private final int w = 4;
     private final int h = 4;
     private int countTimes;
@@ -17,17 +17,31 @@ public class TicTacToe {
         this.countTimes = 9;
         init();
         showBoard();
-        playTicTacToe();
+        playGame();
     }
 
-    private void init() {
+    @Override
+    public void init() {
+        initializeBoard();
+    }
+
+    @Override
+    public void playGame() {
+        try {
+            playTicTacToe();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void initializeBoard() {
         for (int i = 0; i < h; i++) {
             for (int j = 0; j < w; j++) {
-                if(i == 0) {
+                if (i == 0) {
                     board[i][j] = String.valueOf(j);
                     continue;
                 }
-                if(j == 0) {
+                if (j == 0) {
                     board[i][j] = String.valueOf(i);
                     continue;
                 }
@@ -60,7 +74,7 @@ public class TicTacToe {
                 if (isAlreadyDraw(i, j)) {
                     throw new IllegalArgumentException("유효 하지 않은 입력 입니다. 다시 입력 해주세요.");
                 }
-            } catch(IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 showBoard();
                 continue;
@@ -69,11 +83,12 @@ public class TicTacToe {
             draw_OX(i, j);
 
             showBoard();
-            if(--countTimes == 0) break;
-            System.out.println(countTimes);
+
+            if (--countTimes == 0) break;
+
         } while (!isWin());
 
-        if(!isDraw()) {
+        if (!isDraw()) {
             showWinner();
         } else {
             System.out.println("Draw!!");
@@ -112,11 +127,12 @@ public class TicTacToe {
     }
 
     public boolean isDraw() {
-        if(this.countTimes == 0) {
+        if (this.countTimes == 0) {
             return true;
         }
         return false;
     }
+
     private void showWinner() {
         String winner = !this.flag ? "< O >" : "< X >";
         System.out.println("----------------------");
@@ -125,7 +141,7 @@ public class TicTacToe {
     }
 
     private void showCurrentTurn() {
-        if(!isWin()) {
+        if (!isWin()) {
             String nowPlayer = this.flag ? "< O >" : "< X >";
             System.out.println(nowPlayer + "'s turn.");
         } else {
@@ -134,7 +150,7 @@ public class TicTacToe {
     }
 
     private boolean isAlreadyDraw(int i, int j) {
-        if(board[i][j].equals("O") || board[i][j].equals("X")) return true;
+        if (board[i][j].equals("O") || board[i][j].equals("X")) return true;
         return false;
     }
 }
