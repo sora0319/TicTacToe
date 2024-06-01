@@ -1,4 +1,8 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Board {
     private final int w = 3;
@@ -6,9 +10,10 @@ public class Board {
     private boolean flag = true;
     private final String[][] board = new String[w][h];
 
-    public Board() {
+    public Board() throws IOException {
         initBoard();
         showBoard();
+        playTicTacToe();
     }
 
     void initBoard() {
@@ -22,6 +27,20 @@ public class Board {
     void showBoard() {
         for (int i = 0; i < h; i++) {
             System.out.println(Arrays.toString(board[i]));
+        }
+    }
+
+    void playTicTacToe() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        int i;
+        int j;
+        while(!isWin()) {
+            st = new StringTokenizer(br.readLine());
+            i = Integer.parseInt(st.nextToken());
+            j = Integer.parseInt(st.nextToken());
+
+            draw_OX(i, j);
         }
     }
 
