@@ -4,13 +4,13 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class Board {
+public class TicTacToe {
     private final int w = 4;
     private final int h = 4;
     private boolean flag = true;
     private final String[][] board = new String[w][h];
 
-    public Board() throws IOException {
+    public TicTacToe() throws IOException {
         initBoard();
         showBoard();
         playTicTacToe();
