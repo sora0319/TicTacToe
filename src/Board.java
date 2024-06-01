@@ -55,20 +55,32 @@ public class Board {
     }
 
     boolean isWin() {
-        if (board[0][0].equals(board[0][1]) && board[0][1].equals(board[0][2])) return true;
-        if (board[1][0].equals(board[1][1]) && board[1][1].equals(board[1][2])) return true;
-        if (board[2][0].equals(board[2][1]) && board[2][1].equals(board[2][2])) return true;
-        if (board[0][0].equals(board[1][0]) && board[1][0].equals(board[1][2])) return true;
-        if (board[0][1].equals(board[1][1]) && board[1][1].equals(board[2][1])) return true;
-        if (board[0][2].equals(board[1][2]) && board[1][2].equals(board[2][2])) return true;
-        if (board[0][0].equals(board[1][1]) && board[1][1].equals(board[2][2])) return true;
-        if (board[0][2].equals(board[1][1]) && board[1][1].equals(board[2][0])) return true;
+        String o = "O";
+        String x = "X";
+        if (o.equals(board[0][0]) || x.equals(board[0][0])) {
+            if (board[0][0].equals(board[0][1]) && board[0][1].equals(board[0][2])) return true;
+            if (board[0][0].equals(board[1][0]) && board[1][0].equals(board[1][2])) return true;
+            if (board[0][0].equals(board[1][1]) && board[1][1].equals(board[2][2])) return true;
+        }
+        if (o.equals(board[1][0]) || x.equals(board[1][0])) {
+            if (board[1][0].equals(board[1][1]) && board[1][1].equals(board[1][2])) return true;
+        }
+        if (o.equals(board[2][0]) || x.equals(board[2][0])) {
+            if (board[2][0].equals(board[2][1]) && board[2][1].equals(board[2][2])) return true;
+        }
+        if (o.equals(board[0][1]) || x.equals(board[0][1])) {
+            if (board[0][1].equals(board[1][1]) && board[1][1].equals(board[2][1])) return true;
+        }
+        if (o.equals(board[0][2]) || x.equals(board[0][2])) {
+            if (board[0][2].equals(board[1][2]) && board[1][2].equals(board[2][2])) return true;
+            if (board[0][2].equals(board[1][1]) && board[1][1].equals(board[2][0])) return true;
+        }
 
         return false;
     }
 
     public void showWinner() {
-        String winner = this.flag ? "USER A" : "USER B";
+        String winner = !this.flag ? "< USER A >" : "< USER B >";
         System.out.println(winner + " is Winner!!");
     }
 }
