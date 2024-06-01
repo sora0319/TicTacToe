@@ -34,10 +34,10 @@ public class TicTacToe {
     }
 
     private void showBoard() {
-        showCurrentTurn();
         for (int i = 0; i < h; i++) {
             System.out.println(Arrays.toString(board[i]));
         }
+        showCurrentTurn();
     }
 
     private void playTicTacToe() throws IOException {
@@ -46,6 +46,8 @@ public class TicTacToe {
         int i;
         int j;
         do {
+            System.out.println("좌표를 입력해 주세요.");
+            System.out.print(": ");
             st = new StringTokenizer(br.readLine());
             i = Integer.parseInt(st.nextToken());
             j = Integer.parseInt(st.nextToken());
@@ -100,7 +102,7 @@ public class TicTacToe {
     }
 
     private void showWinner() {
-        String winner = !this.flag ? "< USER A >" : "< USER B >";
+        String winner = !this.flag ? "< O >" : "< X >";
         System.out.println("----------------------");
         System.out.println(winner + " is Winner!!");
         System.out.println("----------------------");
@@ -108,7 +110,7 @@ public class TicTacToe {
 
     private void showCurrentTurn() {
         if(!isWin()) {
-            String nowPlayer = this.flag ? "< USER A >" : "< USER B >";
+            String nowPlayer = this.flag ? "< O >" : "< X >";
             System.out.println(nowPlayer + "'s turn.");
         } else {
             System.out.println("Game Set!!");
