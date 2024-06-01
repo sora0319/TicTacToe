@@ -7,10 +7,12 @@ import java.util.StringTokenizer;
 public class TicTacToe {
     private final int w = 4;
     private final int h = 4;
+    private int countTimes;
     private boolean flag = true;
     private final String[][] board = new String[w][h];
 
     public TicTacToe() throws IOException {
+        this.countTimes = 9;
         initBoard();
         showBoard();
         playTicTacToe();
@@ -65,9 +67,15 @@ public class TicTacToe {
             draw_OX(i, j);
 
             showBoard();
+            if(--countTimes == 0) break;
+            System.out.println(countTimes);
         } while (!isWin());
 
-        showWinner();
+        if(!isDraw()) {
+            showWinner();
+        } else {
+            System.out.println("Draw!!");
+        }
     }
 
 
@@ -101,6 +109,12 @@ public class TicTacToe {
         return false;
     }
 
+    public boolean isDraw() {
+        if(this.countTimes == 0) {
+            return true;
+        }
+        return false;
+    }
     private void showWinner() {
         String winner = !this.flag ? "< O >" : "< X >";
         System.out.println("----------------------");
