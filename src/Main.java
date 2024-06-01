@@ -1,3 +1,5 @@
+import manager.GameManager;
+
 import java.io.IOException;
 
 public class Main {

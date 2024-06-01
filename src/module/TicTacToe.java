@@ -1,3 +1,5 @@
+package module;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,12 +15,12 @@ public class TicTacToe {
 
     public TicTacToe() throws IOException {
         this.countTimes = 9;
-        initBoard();
+        init();
         showBoard();
         playTicTacToe();
     }
 
-    private void initBoard() {
+    private void init() {
         for (int i = 0; i < h; i++) {
             for (int j = 0; j < w; j++) {
                 if(i == 0) {
