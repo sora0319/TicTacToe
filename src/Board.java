@@ -107,8 +107,12 @@ public class Board {
     }
 
     public void showCurrentTurn() {
-        String nowPlayer = this.flag ? "< USER A >" : "< USER B >";
-        System.out.println(nowPlayer + "'s turn.");
+        if(!isWin()) {
+            String nowPlayer = this.flag ? "< USER A >" : "< USER B >";
+            System.out.println(nowPlayer + "'s turn.");
+        } else {
+            System.out.println("Game Set!!");
+        }
     }
 
     public boolean isAlreadyDraw(int i, int j) {
