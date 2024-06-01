@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
 public class TicTacToe implements Playable {
@@ -63,18 +64,23 @@ public class TicTacToe implements Playable {
         int i;
         int j;
         do {
-            System.out.println("좌표를 입력해 주세요.");
-            System.out.print(": ");
-            st = new StringTokenizer(br.readLine());
-            i = Integer.parseInt(st.nextToken());
-            j = Integer.parseInt(st.nextToken());
-
             try {
+                System.out.println("좌표를 입력해 주세요.");
+                System.out.print(": ");
+                st = new StringTokenizer(br.readLine());
+                i = Integer.parseInt(st.nextToken());
+                j = Integer.parseInt(st.nextToken());
+
+
                 if (isAlreadyDraw(i, j)) {
                     throw new IllegalArgumentException("유효 하지 않은 입력 입니다. 다시 입력 해주세요.");
                 }
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
+                showBoard();
+                continue;
+            } catch (NoSuchElementException e) {
+                System.out.println("유효 하지 않은 입력 입니다. 다시 입력 해주세요.");
                 showBoard();
                 continue;
             }
@@ -87,9 +93,10 @@ public class TicTacToe implements Playable {
 
         } while (!isWin());
 
-        if (!isDraw()) {
+        if (isWin() || (isWin() && isCountEnd())) {
             showWinner();
-        } else {
+        }
+        else {
             System.out.println("Draw!!");
         }
     }
@@ -125,7 +132,7 @@ public class TicTacToe implements Playable {
         return false;
     }
 
-    public boolean isDraw() {
+    public boolean isCountEnd() {
         if (this.countTimes == 0) {
             return true;
         }
@@ -144,7 +151,7 @@ public class TicTacToe implements Playable {
             String nowPlayer = this.flag ? "< O >" : "< X >";
             System.out.println(nowPlayer + "'s turn.");
         } else {
-            System.out.println("Game Set!!");
+            System.out.println("Game End!!");
         }
     }
 
