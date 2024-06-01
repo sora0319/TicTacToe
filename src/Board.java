@@ -35,14 +35,19 @@ public class Board {
         StringTokenizer st;
         int i;
         int j;
-        while(!isWin()) {
+        do {
             st = new StringTokenizer(br.readLine());
             i = Integer.parseInt(st.nextToken());
             j = Integer.parseInt(st.nextToken());
 
             draw_OX(i, j);
-        }
+
+            showBoard();
+        } while (!isWin());
+
+        showWinner();
     }
+
 
     void draw_OX(int i, int j) {
         this.board[i][j] = this.flag ? "O" : "X";
@@ -60,6 +65,11 @@ public class Board {
         if (board[0][2].equals(board[1][1]) && board[1][1].equals(board[2][0])) return true;
 
         return false;
+    }
+
+    public void showWinner() {
+        String winner = this.flag ? "USER A" : "USER B";
+        System.out.println(winner + " is Winner!!");
     }
 }
 
