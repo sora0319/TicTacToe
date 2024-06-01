@@ -13,7 +13,7 @@ public class TicTacToe implements Playable {
     private boolean flag = true;
     private final String[][] board = new String[w][h];
 
-    public TicTacToe() throws IOException {
+    public TicTacToe() {
         this.countTimes = 9;
         init();
         showBoard();
