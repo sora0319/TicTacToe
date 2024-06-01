@@ -16,7 +16,7 @@ public class Board {
         playTicTacToe();
     }
 
-    void initBoard() {
+    private void initBoard() {
         for (int i = 0; i < h; i++) {
             for (int j = 0; j < w; j++) {
                 if(i == 0) {
@@ -33,14 +33,14 @@ public class Board {
         }
     }
 
-    void showBoard() {
+    private void showBoard() {
         showCurrentTurn();
         for (int i = 0; i < h; i++) {
             System.out.println(Arrays.toString(board[i]));
         }
     }
 
-    void playTicTacToe() throws IOException {
+    private void playTicTacToe() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         int i;
@@ -69,12 +69,12 @@ public class Board {
     }
 
 
-    void draw_OX(int i, int j) {
+    private void draw_OX(int i, int j) {
         this.board[i][j] = this.flag ? "O" : "X";
         this.flag = !flag;
     }
 
-    boolean isWin() {
+    private boolean isWin() {
         String o = "O";
         String x = "X";
         if (o.equals(board[1][1]) || x.equals(board[1][1])) {
@@ -99,14 +99,14 @@ public class Board {
         return false;
     }
 
-    public void showWinner() {
+    private void showWinner() {
         String winner = !this.flag ? "< USER A >" : "< USER B >";
         System.out.println("----------------------");
         System.out.println(winner + " is Winner!!");
         System.out.println("----------------------");
     }
 
-    public void showCurrentTurn() {
+    private void showCurrentTurn() {
         if(!isWin()) {
             String nowPlayer = this.flag ? "< USER A >" : "< USER B >";
             System.out.println(nowPlayer + "'s turn.");
@@ -115,7 +115,7 @@ public class Board {
         }
     }
 
-    public boolean isAlreadyDraw(int i, int j) {
+    private boolean isAlreadyDraw(int i, int j) {
         if(board[i][j].equals("O") || board[i][j].equals("X")) return true;
         return false;
     }
