@@ -50,7 +50,10 @@ public class GameManager {
                     System.out.println("유효하지 않은 명령 입니다.");
                     break;
             }
-            new GameLauncher(playable).init();
+
+            if(playable != null) {
+                new GameLauncher(playable).init();
+            }
         }
     }
 
