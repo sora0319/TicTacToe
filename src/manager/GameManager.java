@@ -9,8 +9,18 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 
 public class GameManager {
-    public GameManager() throws IOException{
-        initGameManager();
+    private static final GameManager gameManager = new GameManager();
+
+    private GameManager() {
+        try {
+            initGameManager();
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static GameManager getInstance() {
+        return gameManager;
     }
 
     private void initGameManager() throws IOException {
