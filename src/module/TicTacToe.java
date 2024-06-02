@@ -79,7 +79,7 @@ public class TicTacToe implements Playable {
                 System.out.println(e.getMessage());
                 showBoard();
                 continue;
-            } catch (NoSuchElementException e) {
+            } catch (NoSuchElementException | ArrayIndexOutOfBoundsException e) {
                 System.out.println("유효 하지 않은 입력 입니다. 다시 입력 해주세요.");
                 showBoard();
                 continue;
