@@ -44,6 +44,7 @@ public class GameManager {
                     playable = new TicTacToe();
                     break;
                 case 0:
+                    playable = null;
                     System.out.println("시스템을 종료 합니다.");
                     break;
                 default:
@@ -54,6 +55,8 @@ public class GameManager {
             if(playable != null) {
                 new GameLauncher(playable).init();
             }
+
+            playable = null;
         }
     }
 
