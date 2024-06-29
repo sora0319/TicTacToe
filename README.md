@@ -28,7 +28,7 @@
 Tag : 커밋 메시지
 
 ex)
-$ git commit -m"Feat : TicTacToe 승리 조건 체크
+$ git commit -m"Feat : TicTacToe 승리 조건 체크"
 ```
 
 <ul>
