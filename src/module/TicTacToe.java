@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
+import static manager.GameUtil.waitSecond;
+
 public class TicTacToe implements Playable {
     private final int w = 4;
     private final int h = 4;
@@ -21,14 +23,30 @@ public class TicTacToe implements Playable {
     @Override
     public void init() {
         initializeBoard();
-        showBoard();
         playGame();
     }
 
     @Override
     public void playGame() {
         try {
-            playTicTacToe();
+            System.out.println("게임 모드를 선택하세요.");
+            System.out.println("1. BasicMode");
+            System.out.println("2. InfiniteMode");
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            int selectNum = Integer.parseInt(br.readLine());
+
+            if (selectNum == 2) {
+                System.out.println("InifinitMode를 시작합니다.");
+                ready();
+                showBoard();
+                playInfiniteTicTacToe();
+            } else {
+                System.out.println("BasicMode를 시작합니다.");
+                ready();
+                showBoard();
+                playTicTacToe();
+            }
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -60,7 +78,7 @@ public class TicTacToe implements Playable {
         }
     }
 
-    private void playTicTacToe() throws IOException {
+    private void playTicTacToe() {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         int i;
@@ -85,6 +103,8 @@ public class TicTacToe implements Playable {
                 System.out.println("유효 하지 않은 입력 입니다. 다시 입력 해주세요.");
                 showBoard();
                 continue;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
 
             draw_OX(i, j);
@@ -102,6 +122,49 @@ public class TicTacToe implements Playable {
         }
     }
 
+    private void playInfiniteTicTacToe() {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        int i;
+        int j;
+        do {
+            try {
+                System.out.println("좌표를 입력해 주세요.");
+                System.out.print(": ");
+                st = new StringTokenizer(br.readLine());
+                i = Integer.parseInt(st.nextToken());
+                j = Integer.parseInt(st.nextToken());
+
+
+                if (isAlreadyDraw(i, j)) {
+                    throw new IllegalArgumentException("유효 하지 않은 입력 입니다. 다시 입력 해주세요.");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                showBoard();
+                continue;
+            } catch (NoSuchElementException | ArrayIndexOutOfBoundsException e) {
+                System.out.println("유효 하지 않은 입력 입니다. 다시 입력 해주세요.");
+                showBoard();
+                continue;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            draw_OX(i, j);
+
+            showBoard();
+
+            if (--countTimes == 0) break;
+
+        } while (!isWin());
+
+        if (isWin() || (isWin() && isCountEnd())) {
+            showWinner();
+        } else {
+            System.out.println("Draw!!");
+        }
+    }
 
     private void draw_OX(int i, int j) {
         this.board[i][j] = this.flag ? "O" : "X";
@@ -141,10 +204,12 @@ public class TicTacToe implements Playable {
     }
 
     private void showWinner() {
+        waitSecond();
         String winner = !this.flag ? "< O >" : "< X >";
         System.out.println("----------------------");
         System.out.println(winner + " is Winner!!");
         System.out.println("----------------------");
+        waitSecond();
     }
 
     private void showCurrentTurn() {
@@ -152,6 +217,7 @@ public class TicTacToe implements Playable {
             String nowPlayer = this.flag ? "< O >" : "< X >";
             System.out.println(nowPlayer + "'s turn.");
         } else {
+            waitSecond();
             System.out.println("Game End!!");
         }
     }
@@ -160,5 +226,15 @@ public class TicTacToe implements Playable {
         if (board[i][j].equals("O") || board[i][j].equals("X")) return true;
         return false;
     }
-}
 
+    private void ready() {
+        int count = 3;
+        waitSecond();
+        for (int i = count; i > 0; i--) {
+            System.out.println(i + "!");
+            waitSecond();
+        }
+        System.out.println("Battle!");
+        waitSecond();
+    }
+}
