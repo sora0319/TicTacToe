@@ -119,12 +119,21 @@ src
 >> TicTacToe : TicTacToe 게임의 코드가 작성되어있습니다.
 
 <h3>🎾 게임 규칙</h3>
-<h4>1. TicTacToe</h4>
+<h4>1.1 TicTacToe</h4>
 <div>
   두 명이 번갈아 가며 O와 X를 3X3판에 써서 가로, 세로, 대각선 상에 놓이도록 하는 놀이입니다.<br />
   판에 적힌 좌표값을 스페이스로 구분하여 입력하면 O, X를 표시 할 수 있습니다.<br />
   <img width="208" alt="스크린샷 2024-06-02 오후 5 43 25" src="https://github.com/OliveLover/TicTacToe/assets/118647313/c98a96bd-5c28-43fd-93ba-149f39edd003"> <br />
   <img width="188" alt="image" src="https://github.com/OliveLover/TicTacToe/assets/118647313/39bb18fc-cd99-4a18-8821-efbd749b6e6d">
+</div>
+
+<h4>1.2 TicTacToe Infinite Mode</h3>
+<div>
+  무한모드 TicTacToe는 기존 게임 규칙에 3개의 O와 X를 유지하게되며, 3개가 넘어가면 가장 나중에 입력된 O와 X가 사라지는 규칙이 추가되었습니다.
+
+  <img width="181" alt="image" src="https://github.com/OliveLover/TicTacToe/assets/118647313/8f5fc489-1317-464e-bdb9-90ffb7bf7553">
+  <img width="127" alt="image" src="https://github.com/OliveLover/TicTacToe/assets/118647313/af895927-db7d-45b3-8333-cdc1722d5d3e">
+  <img width="142" alt="image" src="https://github.com/OliveLover/TicTacToe/assets/118647313/610da9e5-158c-4599-afc7-feb717dcda0f">
 </div>
 
 <h4>2. Hanoi</h4>
