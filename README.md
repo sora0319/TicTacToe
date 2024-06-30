@@ -1,5 +1,7 @@
 <h1>TicTacToe</h1>
 
+<img width="208" alt="MEGA-Z_GAME" src="https://github.com/OliveLover/TicTacToe/assets/128995184/254c6c06-9e6f-4207-b9a6-40f0fa294988"></br>
+
 <h3>🙂 Learnning Point</h3>
 <ul>
   <li> 객체지향에 대하여 생각해봅니다.</li>
