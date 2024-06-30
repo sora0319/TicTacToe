@@ -55,7 +55,7 @@ public class TicTacToe implements Playable {
         for (int i = 0; i < h; i++) {
             System.out.println(Arrays.toString(board[i]));
         }
-        if(!isWin() || countTimes != 0) {
+        if (!isWin() || countTimes != 0) {
             showCurrentTurn();
         }
     }
@@ -97,8 +97,7 @@ public class TicTacToe implements Playable {
 
         if (isWin() || (isWin() && isCountEnd())) {
             showWinner();
-        }
-        else {
+        } else {
             System.out.println("Draw!!");
         }
     }
