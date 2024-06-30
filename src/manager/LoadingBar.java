@@ -3,7 +3,7 @@ package manager;
 public class LoadingBar {
     public static void main(String[] args) {
         int total = 100;
-        int delay = 100;
+        int delay = 25;
 
         System.out.println(
                 "████████████████████████████████████████████████████████████████████████████\n" +
@@ -44,11 +44,7 @@ public class LoadingBar {
             }
             System.out.print("] " + i + "%");
 
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            GameUtil.waitSecond(delay);
         }
 
         System.out.println("\nLoading complete!");
