@@ -97,7 +97,6 @@ public class Hanoi implements Playable {
     private void displayTowers() {
         int maxWidth = numDisks * 2 + 1;
         int boxWidth = maxWidth + 4;
-        String emptySpace = " ".repeat(boxWidth);
 
         StringBuilder[] display = new StringBuilder[numDisks + 1];
         for (int i = 0; i <= numDisks; i++) {
