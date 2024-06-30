@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-import static manager.GameUtil.waitSecond;
+import static manager.GameUtil.*;
 
 public class TicTacToe implements Playable {
     private final int w = 4;
@@ -155,10 +155,17 @@ public class TicTacToe implements Playable {
 
             if (cache.size() == 7) {
                 int[] check = cache.pollLast();
-                System.out.println(Arrays.toString(check));
                 int del_i = check[0];
                 int del_j = check[1];
                 erase_OX(del_i, del_j);
+            }
+
+            if (cache.size() >= 6) {
+                int[] check = cache.peekLast();
+                int mod_i = check[0];
+                int mod_j = check[1];
+
+                mod_OX(mod_i, mod_j);
             }
 
             draw_OX(i, j);
@@ -179,6 +186,10 @@ public class TicTacToe implements Playable {
 
     private void erase_OX(int i, int j) {
         this.board[i][j] = " ";
+    }
+
+    private void mod_OX(int i, int j) {
+        this.board[i][j] = this.flag ? red + "X" + exit : blue + "O" + exit;
     }
 
     private boolean isWin() {
@@ -233,7 +244,7 @@ public class TicTacToe implements Playable {
     }
 
     private boolean isAlreadyDraw(int i, int j) {
-        if (board[i][j].equals("O") || board[i][j].equals("X")) return true;
+        if (board[i][j].contains("O") || board[i][j].contains("X")) return true;
         return false;
     }
 
