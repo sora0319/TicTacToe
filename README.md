@@ -1,5 +1,7 @@
 <h1>TicTacToe</h1>
 
+<img width="500" alt="MEGA-Z_GAME" src="https://github.com/OliveLover/TicTacToe/assets/128995184/254c6c06-9e6f-4207-b9a6-40f0fa294988"></br>
+
 <h3>🙂 Learnning Point</h3>
 <ul>
   <li> 객체지향에 대하여 생각해봅니다.</li>
@@ -65,4 +67,12 @@ src
   판에 적힌 좌표값을 스페이스로 구분하여 입력하면 O, X를 표시 할 수 있습니다.<br />
   <img width="208" alt="스크린샷 2024-06-02 오후 5 43 25" src="https://github.com/OliveLover/TicTacToe/assets/118647313/c98a96bd-5c28-43fd-93ba-149f39edd003"> <br />
   <img width="188" alt="image" src="https://github.com/OliveLover/TicTacToe/assets/118647313/39bb18fc-cd99-4a18-8821-efbd749b6e6d">
+</div>
+
+<h4>2. Hanoi</h4>
+<div>
+  A타워에 있는 원반을 전부 C타워로 옮기면 이기는 게임입니다.<br />
+  입력 예시는 A B 또는 a b 옮길 현재 위치에서, 옮겨질 위치를 뜻합니다.<br />
+  <img width="208" alt="Hanoi_start" src="https://github.com/OliveLover/TicTacToe/assets/128995184/89ad8f17-96ae-43d1-b15a-94bc4c2bc45f"> <br />
+  <img width="208" alt="Hanoi_win" src="https://github.com/OliveLover/TicTacToe/assets/128995184/d0b11ba2-ce96-49aa-baea-c892d9295409">
 </div>
