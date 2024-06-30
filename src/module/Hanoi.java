@@ -1,6 +1,8 @@
 package module;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class Hanoi implements Playable {
@@ -16,15 +18,26 @@ public class Hanoi implements Playable {
 
     @Override
     public void playGame() {
-        playHanoi();
+        try {
+            playHanoi();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    private void playHanoi() {
-        Scanner in = new Scanner(System.in);
+    public String input() throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String input = in.readLine();
+
+        return input;
+    }
+
+    private void playHanoi() throws IOException {
+
         System.out.print("원반의 갯수를 입력해주세요: ");
         while (true) {
             try {
-                numDisks = Integer.parseInt(in.nextLine());
+                numDisks = Integer.parseInt(input());
                 if (numDisks > 0) {
                     break;
                 } else {
@@ -32,6 +45,8 @@ public class Hanoi implements Playable {
                 }
             } catch (NumberFormatException e) {
                 System.out.print("유효한 숫자를 입력해주세요: ");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
 
@@ -47,7 +62,7 @@ public class Hanoi implements Playable {
 
         while (true) {
             System.out.print("옮길 원반의 출발 타워와 도착 타워를 입력하세요 (예: A C): ");
-            String input = in.nextLine().trim().toUpperCase();
+            String input = input().trim().toUpperCase();
 
             if (input.length() != 3 || input.charAt(1) != ' ' ||
                     input.charAt(0) < 'A' || input.charAt(0) > 'C' ||
