@@ -46,6 +46,64 @@ $ git commit -m"Feat : TicTacToe 승리 조건 체크"
 
 > [**git 명령어 참고**](https://nosy-rabbit.tistory.com/category/%EA%B9%83%20%ED%83%90%EA%B5%AC)
 
+<br />
+
+<h3>🎨 GameUtil 클래스</h3>
+
+<p><code>GameUtil</code> 클래스는 각각의 게임 모듈 제작시에 편의성을 위한 메소드를 포함하고 있습니다.</p>
+
+<h4>1. <code>colorFont()</code></h4>
+
+```
+public static String fontColor(String color, String words) {
+    return colorList.get(color) + words + "\u001B[0m";
+}
+```
+
+<p><code>colorFont()</code>는 게임모듈 제작시 콘솔창에 폰트색을 변경 할 수 있는 기능을 지원합니다.</p>
+
+```
+fontColor({String : 색}, {String : 문자});
+
+ex)
+fontColor("red", "X")
+```
+
+<img width="151" alt="image" src="https://github.com/OliveLover/TicTacToe/assets/118647313/948f2e83-3058-44a3-ab26-6145f94ddd03">
+
+<p>이미지와 같이 <code>"X"</code>가 <code>"red"</code>로 나타납니다.</p>
+
+<h5>지원 하는 폰트 색상</h5>
+<ul>
+  <li>black</li>
+  <li>red</li>
+  <li>green</li>
+  <li>yellow</li>
+  <li>blue</li>
+  <li>purple</li>
+  <li>cyan</li>
+  <li>white</li>
+</ul>
+
+<h4>2. <code>waitSecond()</code></h4>
+
+<p><code>waitSecond()</code>는 <code>Thread</code>를 기반으로 <code>"초"(second)</code>단위로 <code>"지연"(delay)</code>을 줄 수 있습니다. <code>waitSecond()</code>는 게임 모듈 내부의 예외를 작성하지 않고 <code>"지연"(delay)</code>을 주고자 하는 목적으로 만들었습니다.</p>
+
+```
+ex)
+    private void ready() {
+        int count = 3;
+        waitSecond();                      // 1초 지연
+        for (int i = count; i > 0; i--) {
+            System.out.println(i + "!");
+            waitSecond();                  // 1초 지연
+        }
+        System.out.println("Battle!");
+        waitSecond();                      // 1초 지연
+    }
+```
+
+<br />
 
 <h3>🧱 TicTacToe 레포지토리의 구성</h3>
 <p> TicTacToe는 단순히 자바가지고 짧은 게임을 만들다가 다른 게임도 할 수 있도록 확장성을 생각하다가 GameManager로 확장되었습니다.</p>
