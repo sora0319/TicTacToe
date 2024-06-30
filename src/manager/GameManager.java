@@ -1,5 +1,6 @@
 package manager;
 
+import module.Hanoi;
 import module.Playable;
 import module.TicTacToe;
 
@@ -42,6 +43,9 @@ public class GameManager {
             switch (selectNum) {
                 case 1:
                     playable = new TicTacToe();
+                    break;
+                case 2:
+                    playable = new Hanoi();
                     break;
                 case 0:
                     System.out.println("시스템을 종료 합니다.");
