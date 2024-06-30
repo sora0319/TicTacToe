@@ -1,16 +1,25 @@
 package manager;
 
-public class GameUtil {
-    public static final String black    = "\u001B[30m" ;
-    public static final String red      = "\u001B[31m" ;
-    public static final String green    = "\u001B[32m" ;
-    public static final String yellow   = "\u001B[33m" ;
-    public static final String blue     = "\u001B[34m" ;
-    public static final String purple   = "\u001B[35m" ;
-    public static final String cyan     = "\u001B[36m" ;
-    public static final String white     = "\u001B[37m" ;
+import java.util.HashMap;
+import java.util.Map;
 
-    public static final String exit     = "\u001B[0m" ;
+public class GameUtil {
+    private static final Map<String, String> colorList = new HashMap<>(){
+        {
+            put("black", "\u001B[30m");
+            put("red", "\u001B[31m");
+            put("green", "\u001B[32m");
+            put("yellow", "\u001B[33m");
+            put("blue", "\u001B[34m");
+            put("purple", "\u001B[35m");
+            put("cyan", "\u001B[36m");
+            put("white", "\u001B[37m");
+        }
+    };
+
+    public static String fontColor(String color, String words) {
+        return colorList.get(color) + words + "\u001B[0m";
+    }
 
     public static void waitSecond(int Time) {
         try {

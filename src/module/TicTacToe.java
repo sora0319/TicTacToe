@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-import static manager.GameUtil.*;
+import static manager.GameUtil.fontColor;
+import static manager.GameUtil.waitSecond;
 
 public class TicTacToe implements Playable {
     private final int w = 4;
@@ -189,7 +190,7 @@ public class TicTacToe implements Playable {
     }
 
     private void mod_OX(int i, int j) {
-        this.board[i][j] = this.flag ? red + "X" + exit : blue + "O" + exit;
+        this.board[i][j] = this.flag ? fontColor("red", "X") : fontColor("blue", "O");
     }
 
     private boolean isWin() {
