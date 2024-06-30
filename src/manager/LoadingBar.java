@@ -44,11 +44,7 @@ public class LoadingBar {
             }
             System.out.print("] " + i + "%");
 
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            GameUtil.waitSecond(delay);
         }
 
         System.out.println("\nLoading complete!");
