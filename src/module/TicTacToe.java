@@ -3,9 +3,7 @@ package module;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
-import java.util.StringTokenizer;
+import java.util.*;
 
 import static manager.GameUtil.waitSecond;
 
@@ -125,6 +123,7 @@ public class TicTacToe implements Playable {
     private void playInfiniteTicTacToe() {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
+        Deque<int[]> cache = new ArrayDeque<>();
         int i;
         int j;
         do {
@@ -134,7 +133,6 @@ public class TicTacToe implements Playable {
                 st = new StringTokenizer(br.readLine());
                 i = Integer.parseInt(st.nextToken());
                 j = Integer.parseInt(st.nextToken());
-
 
                 if (isAlreadyDraw(i, j)) {
                     throw new IllegalArgumentException("유효 하지 않은 입력 입니다. 다시 입력 해주세요.");
@@ -151,24 +149,36 @@ public class TicTacToe implements Playable {
                 throw new RuntimeException(e);
             }
 
+            int[] pos = {i, j};
+
+            cache.push(pos);
+
+            if (cache.size() == 7) {
+                int[] check = cache.pollLast();
+                System.out.println(Arrays.toString(check));
+                int del_i = check[0];
+                int del_j = check[1];
+                erase_OX(del_i, del_j);
+            }
+
             draw_OX(i, j);
 
             showBoard();
 
-            if (--countTimes == 0) break;
-
         } while (!isWin());
 
-        if (isWin() || (isWin() && isCountEnd())) {
+        if (isWin()) {
             showWinner();
-        } else {
-            System.out.println("Draw!!");
         }
     }
 
     private void draw_OX(int i, int j) {
         this.board[i][j] = this.flag ? "O" : "X";
         this.flag = !flag;
+    }
+
+    private void erase_OX(int i, int j) {
+        this.board[i][j] = " ";
     }
 
     private boolean isWin() {
