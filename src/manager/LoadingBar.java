@@ -31,13 +31,13 @@ public class LoadingBar {
         for (int i = 0; i <= total; i++) {
 
             if (i % 2 == 0) {
-                System.out.print("█");
+                System.out.print("▓");
             }
 
             System.out.print("\r[");
             for (int j = 0; j <= total; j++) {
                 if (j <= i) {
-                    System.out.print("█");
+                    System.out.print("▓");
                 } else {
                     System.out.print(" ");
                 }
