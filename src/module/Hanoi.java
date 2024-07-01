@@ -35,17 +35,9 @@ public class Hanoi implements Playable {
     }
 
     private void playHanoi() throws IOException {
-
         numDisks = diskNumInput();
-
         initializeTowers();
-
-
         handleTowerInput();
-
-
-
-
     }
 
     private void handleTowerInput() throws IOException {
@@ -58,7 +50,7 @@ public class Hanoi implements Playable {
                 System.out.println("하노이 게임을 종료합니다.");
                 break;
             } else if(input.equals("AUTO")) {
-               hanleAutoCompletion();
+               handleAutoCompletion();
                 break;
             } else if (isValidTowerMoveInput(input)) {
                 processTowerMove(input);
@@ -98,7 +90,7 @@ public class Hanoi implements Playable {
                 input.charAt(2) >= 'A' && input.charAt(2) <= 'C';
     }
 
-    private void hanleAutoCompletion(){
+    private void handleAutoCompletion(){
         resetGame();
         initializeTowers();
         autoSolve(numDisks, 0, 2, 1);
@@ -185,7 +177,6 @@ public class Hanoi implements Playable {
         for (int i = numDisks; i >= 0; i--) {
             System.out.println(display[i].toString());
         }
-
 
         String boxLineTop = "┌" + "─".repeat(boxWidth - 2) + "┐";
         String boxLineBottom = "└" + "─".repeat(boxWidth - 2) + "┘";
