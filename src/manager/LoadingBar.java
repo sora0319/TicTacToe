@@ -1,7 +1,6 @@
 package manager;
 
 import static manager.GameUtil.fontColor;
-import static manager.GameUtil.waitSecond;
 
 public class LoadingBar {
     public static void main(String[] args) {
@@ -9,7 +8,7 @@ public class LoadingBar {
         int delay = 25;
 
         System.out.println(
-                "████████████████████████████████████████████████████████████████████████████\n" +
+                        "████████████████████████████████████████████████████████████████████████████\n" +
                         "█▌ _____ ______   _______   ________  ________               ________     ▐█\n" +
                         "█▌|\\   _ \\  _   \\|\\  ___ \\ |\\   ____\\|\\   __  \\             |\\_____  \\    ▐█\n" +
                         "█▌\\ \\  \\\\\\__\\ \\  \\ \\   __/|\\ \\  \\___|\\ \\  \\|\\  \\  ___________\\|___/  /|   ▐█\n" +

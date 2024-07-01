@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Stack;
+import static manager.GameUtil.fontColor;
 
 public class Hanoi implements Playable {
 
@@ -120,13 +121,14 @@ public class Hanoi implements Playable {
                 if (i < towers[j].size()) {
                     int diskSize = towers[j].get(i) * 2 - 1;
                     int padding = (boxWidth - diskSize) / 2;
+                    String color = getColorForDisk(towers[j].get(i));
                     display[i].append(" ".repeat(padding))
-                            .append("█".repeat(diskSize))
+                            .append(fontColor(color,"█").repeat(diskSize))
                             .append(" ".repeat(padding));
                 } else {
                     int pegPadding = (boxWidth - 1) / 2;
                     display[i].append(" ".repeat(pegPadding))
-                            .append("║")
+                            .append(fontColor("yellow","║"))
                             .append(" ".repeat(pegPadding));
                 }
                 display[i].append("   ");
@@ -151,6 +153,11 @@ public class Hanoi implements Playable {
 
         System.out.println(boxLineBottom + "   " + boxLineBottom + "   " + boxLineBottom);
         System.out.println();
+    }
+
+    public static String getColorForDisk(int diskSize) {
+        String[] colors = {"blue", "green", "red", "cyan", "purple", "white"};
+        return colors[(diskSize - 1) % colors.length];
     }
 
     private boolean isGameWon() {
