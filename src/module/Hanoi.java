@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Stack;
 import static manager.GameUtil.fontColor;
+import static manager.GameUtil.waitSecond;
 
 public class Hanoi implements Playable {
 
@@ -35,21 +36,7 @@ public class Hanoi implements Playable {
 
     private void playHanoi() throws IOException {
 
-        System.out.print("원반의 갯수를 입력해주세요: ");
-        while (true) {
-            try {
-                numDisks = Integer.parseInt(input());
-                if (numDisks > 0) {
-                    break;
-                } else {
-                    System.out.print("양의 정수를 입력해주세요: ");
-                }
-            } catch (NumberFormatException e) {
-                System.out.print("유효한 숫자를 입력해주세요: ");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        numDisks = diskInput();
 
         towers[0] = new Stack<>();
         towers[1] = new Stack<>();
@@ -62,10 +49,27 @@ public class Hanoi implements Playable {
         displayTowers();
 
         while (true) {
+            System.out.println("자동 완성을 보려면 'auto'를 입력 해주세요.");
             System.out.print("옮길 원반의 출발 타워와 도착 타워를 입력하세요 (예: A C): ");
             String input = input().trim().toUpperCase();
 
-            if (input.length() != 3 || input.charAt(1) != ' ' ||
+            if(input.equals("AUTO")) {
+                resetGame();
+                towers[0] = new Stack<>();
+                towers[1] = new Stack<>();
+                towers[2] = new Stack<>();
+
+                for (int i = numDisks; i > 0; i--) {
+                    towers[0].push(i);
+                }
+                displayTowers();
+                autoSolve(numDisks, 0, 2, 1);
+                System.out.println("자동으로 하노이탑을 완성하였습니다!");
+                System.out.println("총 " + moveCount + "번 움직였습니다. 다시 도전해보세요!");
+                resetGame();
+                init();
+                break;
+            } else if (input.length() != 3 || input.charAt(1) != ' ' ||
                     input.charAt(0) < 'A' || input.charAt(0) > 'C' ||
                     input.charAt(2) < 'A' || input.charAt(2) > 'C') {
                 System.out.println("잘못된 입력입니다. 'A B'와 같은 형식으로 입력해주세요.");
@@ -92,6 +96,28 @@ public class Hanoi implements Playable {
         }
 
     }
+
+    private int diskInput(){
+        System.out.print("원반의 갯수를 입력해주세요: ");
+        int numDisks;
+        while (true) {
+            try {
+                numDisks = Integer.parseInt(input());
+                if (numDisks > 0) {
+                    break;
+                } else {
+                    System.out.print("양의 정수를 입력해주세요: ");
+                }
+            } catch (NumberFormatException e) {
+                System.out.print("유효한 숫자를 입력해주세요: ");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return numDisks;
+    }
+
+
 
     private boolean isValidMove(int source, int destination) {
         if (source < 0 || source > 2 || destination < 0 || destination > 2 || towers[source].isEmpty()) {
@@ -162,6 +188,30 @@ public class Hanoi implements Playable {
 
     private boolean isGameWon() {
         return towers[2].size() == numDisks;
+    }
+
+    private void autoSolve(int n, int source, int destination, int tmp) {
+        if (n == 1) {
+            moveDisk(source, destination);
+            moveCount++;
+            waitSecond();
+            return;
+        }
+
+        if (!towers[source].isEmpty()) {
+            autoSolve(n - 1, source, tmp, destination);
+            moveDisk(source, destination);
+            moveCount++;
+            waitSecond();
+            autoSolve(n - 1, tmp, destination, source);
+        }
+    }
+
+    private void resetGame() {
+        towers[0].clear();
+        towers[1].clear();
+        towers[2].clear();
+        moveCount = 0;
     }
 
 }
