@@ -36,68 +36,79 @@ public class Hanoi implements Playable {
 
     private void playHanoi() throws IOException {
 
-        numDisks = diskInput();
+        numDisks = diskNumInput();
 
-        towers[0] = new Stack<>();
-        towers[1] = new Stack<>();
-        towers[2] = new Stack<>();
+        initializeTowers();
 
-        for (int i = numDisks; i > 0; i--) {
-            towers[0].push(i);
-        }
 
-        displayTowers();
+        handleTowerInput();
 
-        while (true) {
-            System.out.println("자동 완성을 보려면 'auto'를 입력 해주세요.");
-            System.out.print("옮길 원반의 출발 타워와 도착 타워를 입력하세요 (예: A C): ");
-            String input = input().trim().toUpperCase();
 
-            if(input.equals("AUTO")) {
-                resetGame();
-                towers[0] = new Stack<>();
-                towers[1] = new Stack<>();
-                towers[2] = new Stack<>();
 
-                for (int i = numDisks; i > 0; i--) {
-                    towers[0].push(i);
-                }
-                displayTowers();
-                autoSolve(numDisks, 0, 2, 1);
-                System.out.println("자동으로 하노이탑을 완성하였습니다!");
-                System.out.println("총 " + moveCount + "번 움직였습니다. 다시 도전해보세요!");
-                resetGame();
-                init();
-                break;
-            } else if (input.length() != 3 || input.charAt(1) != ' ' ||
-                    input.charAt(0) < 'A' || input.charAt(0) > 'C' ||
-                    input.charAt(2) < 'A' || input.charAt(2) > 'C') {
-                System.out.println("잘못된 입력입니다. 'A B'와 같은 형식으로 입력해주세요.");
-                continue;
-            }
-
-            char from = input.charAt(0);
-            char to = input.charAt(2);
-
-            int source = from - 'A';
-            int destination = to - 'A';
-
-            if (isValidMove(source, destination)) {
-                moveDisk(source, destination);
-                moveCount++;
-                if (isGameWon()) {
-                    System.out.println("축하합니다! 하노이탑을 완성하셨습니다!!");
-                    System.out.println("총 " + moveCount + "번 움직였습니다.");
-                    break;
-                }
-            } else {
-                System.out.println("잘못된 움직임입니다. 다시 시도하세요.");
-            }
-        }
 
     }
 
-    private int diskInput(){
+    private void handleTowerInput() throws IOException {
+        while (true) {
+            System.out.println("자동 완성을 보려면 'auto'를 입력 해주세요. 하노이 게임을 종료하고 싶으면 '0'을 입력해주세요.");
+            System.out.print("옮길 원반의 출발 타워와 도착 타워를 입력하세요 (예: A C): ");
+            String input = input().trim().toUpperCase();
+
+            if(input.equals("0")) {
+                System.out.println("하노이 게임을 종료합니다.");
+                break;
+            } else if(input.equals("AUTO")) {
+               hanleAutoCompletion();
+                break;
+            } else if (isValidTowerMoveInput(input)) {
+                processTowerMove(input);
+                if (isGameWon()) {
+                    displayGameWonMessage();
+                    break;
+                }
+            } else {
+                System.out.println("잘못된 입력입니다. 'A B'와 같은 형식으로 입력해주세요.");
+            }
+        }
+    }
+
+    private void displayGameWonMessage() {
+        System.out.println("축하합니다! 하노이탑을 완성하셨습니다!!");
+        System.out.println("총 " + moveCount + "번 움직였습니다.");
+    }
+
+    private void processTowerMove(String input) {
+        char from = input.charAt(0);
+        char to = input.charAt(2);
+
+        int source = from - 'A';
+        int destination = to - 'A';
+
+        if (isValidMove(source, destination)) {
+            moveDisk(source, destination);
+            moveCount++;
+        } else {
+            System.out.println("잘못된 움직임입니다. 다시 시도하세요.");
+        }
+    }
+
+    private boolean isValidTowerMoveInput(String input) {
+        return input.length() == 3 && input.charAt(1) == ' ' &&
+                input.charAt(0) >= 'A' && input.charAt(0) <= 'C' &&
+                input.charAt(2) >= 'A' && input.charAt(2) <= 'C';
+    }
+
+    private void hanleAutoCompletion(){
+        resetGame();
+        initializeTowers();
+        autoSolve(numDisks, 0, 2, 1);
+        System.out.println("자동으로 하노이탑을 완성하였습니다!");
+        System.out.println("총 " + moveCount + "번 움직였습니다. 다시 도전해보세요!");
+        resetGame();
+        init();
+    }
+
+    private int diskNumInput(){
         System.out.print("원반의 갯수를 입력해주세요: ");
         int numDisks;
         while (true) {
@@ -117,7 +128,17 @@ public class Hanoi implements Playable {
         return numDisks;
     }
 
+    private void initializeTowers(){
+        towers[0] = new Stack<>();
+        towers[1] = new Stack<>();
+        towers[2] = new Stack<>();
 
+        for (int i = numDisks; i > 0; i--) {
+            towers[0].push(i);
+        }
+
+        displayTowers();
+    }
 
     private boolean isValidMove(int source, int destination) {
         if (source < 0 || source > 2 || destination < 0 || destination > 2 || towers[source].isEmpty()) {
