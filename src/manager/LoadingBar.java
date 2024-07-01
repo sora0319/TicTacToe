@@ -1,12 +1,14 @@
 package manager;
 
+import static manager.GameUtil.fontColor;
+
 public class LoadingBar {
     public static void main(String[] args) {
         int total = 100;
         int delay = 25;
 
         System.out.println(
-                "████████████████████████████████████████████████████████████████████████████\n" +
+                        "████████████████████████████████████████████████████████████████████████████\n" +
                         "█▌ _____ ______   _______   ________  ________               ________     ▐█\n" +
                         "█▌|\\   _ \\  _   \\|\\  ___ \\ |\\   ____\\|\\   __  \\             |\\_____  \\    ▐█\n" +
                         "█▌\\ \\  \\\\\\__\\ \\  \\ \\   __/|\\ \\  \\___|\\ \\  \\|\\  \\  ___________\\|___/  /|   ▐█\n" +
@@ -18,7 +20,7 @@ public class LoadingBar {
         );
 
         System.out.println(
-                "                   ██████╗  █████╗ ███╗   ███╗███████╗\n" +
+                        "                   ██████╗  █████╗ ███╗   ███╗███████╗\n" +
                         "                   ██╔════╝ ██╔══██╗████╗ ████║██╔════╝\n" +
                         "                   ██║  ███╗███████║██╔████╔██║█████╗  \n" +
                         "                   ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  \n" +
@@ -31,13 +33,13 @@ public class LoadingBar {
         for (int i = 0; i <= total; i++) {
 
             if (i % 2 == 0) {
-                System.out.print("▓");
+                System.out.print(fontColor("green","▓"));
             }
 
             System.out.print("\r[");
             for (int j = 0; j <= total; j++) {
                 if (j <= i) {
-                    System.out.print("▓");
+                    System.out.print(fontColor("green","▓"));
                 } else {
                     System.out.print(" ");
                 }
