@@ -1,5 +1,8 @@
 package manager;
 
+import static manager.GameUtil.fontColor;
+import static manager.GameUtil.waitSecond;
+
 public class LoadingBar {
     public static void main(String[] args) {
         int total = 100;
@@ -18,7 +21,7 @@ public class LoadingBar {
         );
 
         System.out.println(
-                "                   ██████╗  █████╗ ███╗   ███╗███████╗\n" +
+                        "                   ██████╗  █████╗ ███╗   ███╗███████╗\n" +
                         "                   ██╔════╝ ██╔══██╗████╗ ████║██╔════╝\n" +
                         "                   ██║  ███╗███████║██╔████╔██║█████╗  \n" +
                         "                   ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  \n" +
@@ -31,13 +34,13 @@ public class LoadingBar {
         for (int i = 0; i <= total; i++) {
 
             if (i % 2 == 0) {
-                System.out.print("▓");
+                System.out.print(fontColor("green","▓"));
             }
 
             System.out.print("\r[");
             for (int j = 0; j <= total; j++) {
                 if (j <= i) {
-                    System.out.print("▓");
+                    System.out.print(fontColor("green","▓"));
                 } else {
                     System.out.print(" ");
                 }
