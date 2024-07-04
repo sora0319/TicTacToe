@@ -3,6 +3,7 @@ package manager;
 import module.Hanoi;
 import module.Playable;
 import module.TicTacToe;
+import module.Blackjack;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,6 +47,9 @@ public class GameManager {
                     break;
                 case 2:
                     playable = new Hanoi();
+                    break;
+                case 3:
+                    playable = new Blackjack();
                     break;
                 case 0:
                     System.out.println("시스템을 종료 합니다.");
