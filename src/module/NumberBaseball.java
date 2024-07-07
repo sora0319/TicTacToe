@@ -2,6 +2,7 @@ package module;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import manager.GameUtil;
@@ -38,14 +39,13 @@ public class NumberBaseball implements Playable {
             List<Integer> playerGuess = parseInput(input);
 
             if (playerGuess.isEmpty()) {
-                System.out.println("잘못된 입력입니다. 숫자 세 개를 입력하세요.");
                 continue;
             }
 
             attempts++;
             gameFinished = evaluateGuess(playerGuess);
             if (gameFinished) {
-                System.out.println("축하합니다! " + attempts + "번 만에 맞췄습니다!");
+                System.out.println("정답입니다! " + attempts + "번의 시도 만에 맞췄습니다!");
             }
         }
         scanner.close();
@@ -54,16 +54,25 @@ public class NumberBaseball implements Playable {
     // 사용자 입력을 숫자 리스트로 변환
     private List<Integer> parseInput(String input) {
         if (input.length() != NUMBER_LENGTH) {
+            System.out.println("잘못된 입력입니다. 정확히 세 개의 숫자를 입력하세요.");
             return Collections.emptyList();
         }
 
         List<Integer> guess = new ArrayList<>();
         for (char c : input.toCharArray()) {
-            if (!Character.isDigit(c)) {
+            int digit = c - '0';
+            if (digit == 0 || !Character.isDigit(c)) {
+                System.out.println("잘못된 입력입니다. 숫자는 1부터 9까지이며, 0을 포함할 수 없습니다.");
                 return Collections.emptyList();
             }
-            guess.add(c - '0');
+            guess.add(digit);
         }
+
+        if (new HashSet<>(guess).size() != NUMBER_LENGTH) {
+            System.out.println("잘못된 입력입니다. 중복되는 숫자가 있습니다.");
+            return Collections.emptyList();
+        }
+
         return guess;
     }
 
