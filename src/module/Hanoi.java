@@ -7,7 +7,7 @@ import java.util.Stack;
 import static manager.GameUtil.fontColor;
 import static manager.GameUtil.waitSecond;
 
-public class cdHanoi implements Playable {
+public class Hanoi implements Playable {
 
     private Stack<Integer>[] towers = new Stack[3];
     private int numDisks;
@@ -17,6 +17,7 @@ public class cdHanoi implements Playable {
     public void init() {
         playGame();
     }
+
 
     @Override
     public void playGame() {
