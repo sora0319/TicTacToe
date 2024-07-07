@@ -7,7 +7,7 @@ import java.util.Stack;
 import static manager.GameUtil.fontColor;
 import static manager.GameUtil.waitSecond;
 
-public class Hanoi implements Playable {
+public class cdHanoi implements Playable {
 
     private Stack<Integer>[] towers = new Stack[3];
     private int numDisks;
