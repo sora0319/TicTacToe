@@ -1,84 +1,174 @@
 package module.snakegame;
 
+import com.github.kwhat.jnativehook.NativeHookException;
+import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
-public class SnakeGameProcess {
+public class SnakeGameProcess implements Observer {
+    KeyListener keyListener;
+    ConsoleMode consoleMode = new ConsoleMode();
+
+    public SnakeGameProcess(KeyListener Listener){
+        keyListener = Listener;
+        keyListener.addObserver(this);
+        keyListener.registerHook();
+    }
+
     private String direction = "RIGHT";
     private int tableX = 25;
     private int tableY = 50;
+
+    private int score = 0;
 
     private char[][] tableData = new char[tableX][tableY];
     private int[] fruit = new int[2]; // 과일의 x,y축 위치
     private List<int[]> snakeData = new ArrayList<>(); // 뱀 위치 저장소
 
-    private long tableUpdateTime = (long)1000;
-    private int gameSpeed = 1;
+    private long tableUpdateTime = (long)1000/10;
+    private int gameSpeed = 8;
+
+    private Thread updateGui = null;
+    private Thread speedGame = null;
 
     private boolean isUpdateGui = true;
     private boolean isSpeedGame = true;
 
+    @Override
+    public void update(Observable o, Object arg) {
+        if (o instanceof KeyListener) {
+            int keyCode = (int) arg;
 
+            if(keyCode == NativeKeyEvent.VC_UP && !direction.equals("DOWN")){
+                direction = "UP";
+            }
+            if(keyCode == NativeKeyEvent.VC_DOWN && !direction.equals("UP")){
+                direction = "DOWN";
+            }
+            if(keyCode == NativeKeyEvent.VC_LEFT && !direction.equals("RIGHT")){
+                direction = "LEFT";
+            }
+            if(keyCode == NativeKeyEvent.VC_RIGHT && !direction.equals("LEFT")){
+                direction = "RIGHT";
+            }
+            if(keyCode == NativeKeyEvent.VC_ESCAPE){
+                isUpdateGui = false;
+                isSpeedGame = false;
 
-
+                System.out.println("ESC key pressed. Exiting...");
+                keyListener.removeHook();
+            }
+        }
+    }
 
     public void start() {
         resetGame();
         printTable();
 
-        Thread updateGui = new Thread(new Runnable() {
+        updateGui = new Thread(new Runnable() {
             @Override
             public void run() {
-                //System.out.println("thread gui start");
                 try {
-
                     while (isUpdateGui){
                         // console clear
                         new ProcessBuilder("cmd", "/c", "cls" ).inheritIO().start().waitFor();
+                        // disable console echo mode
+                        consoleMode.setupWindowsConsole();
 
                         printTable();
+                        System.out.println("Score : " + score);
                         Thread.sleep(tableUpdateTime);
+                        consoleMode.restoreWindowsConsole();
                     }
                 } catch (Exception e){
                     e.printStackTrace();
-                    return;
+                    stopAllbyError();
                 }
             }
         });
 
-        Thread speedGame = new Thread(new Runnable() {
+        speedGame = new Thread(new Runnable() {
             @Override
             public void run() {
-                long speed = (1000 - (gameSpeed * 100L));
+                long speed = (1000 - (gameSpeed * 100));
+                try {
+                    while(isSpeedGame){
+                        resetSnakeInTable();
 
-                try{
-                    while (true){
-                        for (int [] body : snakeData) {
-                            tableData[body[0]][body[1]] = ' ';
-                        }
+                        updateSnakePosition();
 
-
-                        // update snake, fruit posiiton
                         insertSnakeInTable();
                         insertFruitInTable();
 
-                        //Thread.sleep(speed > 50 ? speed : 50);
+                        Thread.sleep(speed > 50 ? speed : 50);
                     }
-                }catch(Exception e){
+                } catch (Exception e){
                     e.printStackTrace();
-                    return;
+                    stopAllbyError();
                 }
             }
-
         });
 
-
-        KeyListener keyListener = new KeyListener();
         updateGui.start();
+        speedGame.start();
 
+
+        try {
+            updateGui.join();
+            speedGame.join();
+            keyListener.removeHook();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateSnakePosition() {
+        int [] head = snakeData.get(0);
+
+        // 무조건 이동시  뱀 길이 1칸씩 늘이기
+        if(direction.equals("UP")){
+            snakeData.add(0, new int[] {head[0] - 1, head[1]});
+        }
+        if(direction.equals("DOWN")){
+            snakeData.add(0, new int[] {head[0]+1, head[1]});
+        }
+        if(direction.equals("LEFT")){
+            snakeData.add(0, new int[] {head[0], head[1] - 1 });
+        }
+        if(direction.equals("RIGHT")){
+            snakeData.add(0, new int[] {head[0], head[1] + 1});
+        }
+
+        if (head[0] == fruit[0] && head[1] == fruit[1]){
+            createRandomFruit();
+            score++;
+        }else{
+            // 과일 먹지 못하면 뱀 길이 1칸 줄이기
+            snakeData.remove(snakeData.size() - 1);
+        }
+
+        int [] newHead = snakeData.get(0);
+
+        //Head Collition with any wall
+        if (newHead[0] <= 0 || newHead[0] >= tableX -1 || newHead[1] <= 0 || newHead[1] >= tableY -1){
+            stopAllbyError();
+        }
+
+        //Head Collition with body 
+        for (int [] body : snakeData.subList(1, snakeData.size())){
+            if(body[0] == newHead[0] && body[1] == newHead[1]){
+                stopAllbyError();
+                break;
+            }
+        }
+    }
+
+    private void stopAllbyError() {
+        isUpdateGui = false;
+        isSpeedGame = false;
+        keyListener.removeHook();
     }
 
     private void printTable() {
@@ -87,6 +177,12 @@ public class SnakeGameProcess {
                 System.out.print(tableData[i][j]);
             }
             System.out.println();
+        }
+    }
+
+    private void resetSnakeInTable(){
+        for(int[] snake : snakeData){
+            tableData[snake[0]][snake[1]] = ' ';
         }
     }
 
@@ -141,27 +237,42 @@ public class SnakeGameProcess {
     }
 
     private void insertSnakeInTable() {
-        int[] body;
         try {
             for(int[] snake : snakeData){
                 tableData[snake[0]][snake[1]] = '■';
             }
-
-            // head
-            body = snakeData.get(0);
-            tableData[body[0]][body[1]] = '▷';
-
-            //tail 1
-            body = snakeData.get(snakeData.size()-2);
-            tableData[body[0]][body[1]] = '◀';
-
-            //tail2
-            body = snakeData.get(snakeData.size()-1);
-            tableData[body[0]][body[1]] = '←';
-
+            insertSnakeByDirection();
         } catch (ArrayIndexOutOfBoundsException e){
             e.printStackTrace();
             resetGame();
+        }
+    }
+
+    private void insertSnakeByDirection() {
+        // head
+        int[] head = snakeData.get(0);
+        int[] tail1 = snakeData.get(snakeData.size()-2);
+        int[] tail2 = snakeData.get(snakeData.size()-1);
+
+        if(direction.equals("UP")){
+            tableData[head[0]][head[1]] = '△';
+            tableData[tail1[0]][tail1[1]] = '▼';
+            tableData[tail2[0]][tail2[1]] = '↓';
+        }
+        if(direction.equals("DOWN")){
+            tableData[head[0]][head[1]] = '▽';
+            tableData[tail1[0]][tail1[1]] = '▲';
+            tableData[tail2[0]][tail2[1]] = '↑';
+        }
+        if(direction.equals("LEFT")){
+            tableData[head[0]][head[1]] = '◁';
+            tableData[tail1[0]][tail1[1]] = '▶';
+            tableData[tail2[0]][tail2[1]] = '→';
+        }
+        if(direction.equals("RIGHT")){
+            tableData[head[0]][head[1]] = '▷';
+            tableData[tail1[0]][tail1[1]] = '◀';
+            tableData[tail2[0]][tail2[1]] = '←';
         }
     }
 
@@ -201,4 +312,6 @@ public class SnakeGameProcess {
         fruit[0] = fruitX;
         fruit[1] = fruitY;
     }
+
+
 }
