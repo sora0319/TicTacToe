@@ -1,23 +1,20 @@
 package module;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
 import manager.GameUtil;
 
+import java.util.*;
+
 public class NumberBaseball implements Playable {
-    private static final int NUMBER_LENGTH = 3; // 정답 숫자의 길이
-    private List<Integer> computerNumbers; // 컴퓨터가 생성한 숫자들
+    private static final int NUMBER_LENGTH = 3;
+    private List<Integer> computerNumbers;
 
     @Override
     public void init() {
         computerNumbers = generateRandomNumbers();
         System.out.println("숫자가 설정되었습니다. 게임을 시작하세요!");
+        playGame();
     }
 
-    // 1부터 9까지 숫자를 섞어서 첫 3개를 선택
     private List<Integer> generateRandomNumbers() {
         List<Integer> numbers = new ArrayList<>();
         for (int i = 1; i <= 9; i++) {
@@ -48,13 +45,12 @@ public class NumberBaseball implements Playable {
                 System.out.println("정답입니다! " + attempts + "번의 시도 만에 맞췄습니다!");
             }
         }
-        scanner.close();
+
     }
 
-    // 사용자 입력을 숫자 리스트로 변환
     private List<Integer> parseInput(String input) {
         if (input.length() != NUMBER_LENGTH) {
-            System.out.println("잘못된 입력입니다. 정확히 세 개의 숫자를 입력하세요.");
+            showError("잘못된 입력입니다. 정확히 세 개의 숫자를 입력하세요.");
             return Collections.emptyList();
         }
 
@@ -62,25 +58,27 @@ public class NumberBaseball implements Playable {
         for (char c : input.toCharArray()) {
             int digit = c - '0';
             if (digit == 0 || !Character.isDigit(c)) {
-                System.out.println("잘못된 입력입니다. 숫자는 1부터 9까지이며, 0을 포함할 수 없습니다.");
+                showError("숫자는 1부터 9까지이며, 0을 포함할 수 없습니다.");
                 return Collections.emptyList();
             }
             guess.add(digit);
         }
 
         if (new HashSet<>(guess).size() != NUMBER_LENGTH) {
-            System.out.println("잘못된 입력입니다. 중복되는 숫자가 있습니다.");
+            showError("중복되는 숫자가 있습니다.");
             return Collections.emptyList();
         }
 
         return guess;
     }
 
-    // 사용자의 추측을 평가
+    private void showError(String message) {
+        System.out.println(message);
+    }
+
     private boolean evaluateGuess(List<Integer> guess) {
         int strikes = 0;
         int balls = 0;
-
         for (int i = 0; i < NUMBER_LENGTH; i++) {
             int guessedNumber = guess.get(i);
             if (guessedNumber == computerNumbers.get(i)) {
@@ -89,7 +87,6 @@ public class NumberBaseball implements Playable {
                 balls++;
             }
         }
-
         System.out.println(GameUtil.fontColor("red", strikes + " 스트라이크") + ", " + GameUtil.fontColor("green", balls + " 볼"));
         return strikes == NUMBER_LENGTH;
     }

@@ -10,6 +10,5 @@ public class GameLauncher {
 
     public void init() {
         this.playable.init();
-        this.playable.playGame();
     }
 }
