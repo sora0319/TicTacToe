@@ -4,7 +4,9 @@ public enum GameList {
 
     TIC_TAC_TOE(1, "TicTacToe"),
     HANOI(2, "Hanoi"),
-    BLACKJACK(3, "Blackjack");
+    BLACKJACK(3, "Blackjack"),
+    NUMBER_BASEBALL(4, "NumberBaseball");
+
 
     private final int num;
     private final String gameName;

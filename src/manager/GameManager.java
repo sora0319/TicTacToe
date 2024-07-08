@@ -1,12 +1,6 @@
 package manager;
 
-import module.Hanoi;
-import module.Playable;
-import module.TicTacToe;
-import module.Blackjack;
-import module.SnakeGame;
-import module.snakegame.KeyListener;
-
+import module.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -53,6 +47,9 @@ public class GameManager {
                     break;
                 case 3:
                     playable = new Blackjack();
+                    break;
+                case 4:
+                    playable = new NumberBaseball();
                     break;
                 case 5:
                     playable = new SnakeGame(keyListener);

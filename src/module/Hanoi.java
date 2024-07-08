@@ -18,6 +18,7 @@ public class Hanoi implements Playable {
         playGame();
     }
 
+
     @Override
     public void playGame() {
         try {
