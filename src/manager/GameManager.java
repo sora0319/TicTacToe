@@ -1,7 +1,6 @@
 package manager;
 
 import module.*;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -26,6 +25,7 @@ public class GameManager {
         Playable playable = null;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int selectNum = -1;
+        KeyListener keyListener = KeyListener.getInstance();
 
         while (selectNum != 0) {
             showMenu();
@@ -51,8 +51,12 @@ public class GameManager {
                 case 4:
                     playable = new NumberBaseball();
                     break;
+                case 5:
+                    playable = new SnakeGame(keyListener);
+                    break;
                 case 0:
                     System.out.println("시스템을 종료 합니다.");
+                    keyListener.unregisterHook();
                     break;
                 default:
                     System.out.println("유효하지 않은 명령 입니다.");
