@@ -17,7 +17,6 @@ public class CardDeck {
             mixedCards.push(cards.get(rand));
             cards.remove(rand);
         }
-
     }
     private void makeCards(){   //카드 52장을 순서대로 만들어 cards 리스트에 넣는다
         for(Suit suit : Suit.values()){

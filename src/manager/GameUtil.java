@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameUtil {
-    private static final Map<String, String> colorList = new HashMap<>(){
+    private static final Map<String, String> colorList = new HashMap<>() {
         {
             put("black", "\u001B[30m");
             put("red", "\u001B[31m");

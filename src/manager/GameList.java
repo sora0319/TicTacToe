@@ -1,11 +1,14 @@
 package manager;
 
+import module.SnakeGame;
+
 public enum GameList {
 
     TIC_TAC_TOE(1, "TicTacToe"),
     HANOI(2, "Hanoi"),
     BLACKJACK(3, "Blackjack"),
-    NUMBER_BASEBALL(4, "NumberBaseball");
+    NUMBER_BASEBALL(4, "NumberBaseball"),
+    Snake_Game(5, "SnakeGame");
 
 
     private final int num;
