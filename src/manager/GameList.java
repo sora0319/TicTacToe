@@ -1,7 +1,5 @@
 package manager;
 
-import module.SnakeGame;
-
 public enum GameList {
 
     TIC_TAC_TOE(1, "TicTacToe"),
@@ -9,6 +7,7 @@ public enum GameList {
     BLACKJACK(3, "Blackjack"),
     NUMBER_BASEBALL(4, "NumberBaseball"),
     SNAKE_GAME(5, "SnakeGame"),
+    OMOK(6, "Omok"),
     OMOK_JMR(7, "Omok_JMR");
 
 
