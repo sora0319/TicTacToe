@@ -87,12 +87,12 @@ public class UI {
     public static int betInputs(int currentMoney){
         int betting;
         while(true){
-            System.out.print("베팅할 금액을 정해주십시오(최소 1000 ~ 최대 50000) : ");
+            System.out.print("베팅할 금액을 정해주십시오(최소 1000 ~ 최대 무제한) : ");
             betting = getInput();
             System.out.println("");
             if(betting>currentMoney){
                 System.out.println("베팅한 금액이 잔액보다 많습니다. 다시 입력해 주세요");
-            }else if(betting >= 1000 && betting <= 50000){
+            }else if(betting >= 1000){
                 System.out.printf("%d 원을 베팅합니다\n", betting);
                 return betting;
             }else {
@@ -104,10 +104,10 @@ public class UI {
     public static int setPlayersSeedMoney(){
         int seedMoney;
         while(true){
-            System.out.print("게임 시작 시 플레이어가 가지고 있을 돈의 액수를 입력해 주시오(최소 5000 ~ 최대 500000) : ");
+            System.out.print("게임 시작 시 플레이어가 가지고 있을 돈의 액수를 입력해 주시오(최소 5000 ~ 최대 50000000) : ");
             seedMoney = getInput();
             System.out.println("");
-            if(seedMoney >= 5000 && seedMoney <= 500000){
+            if(seedMoney >= 5000 && seedMoney <= 500000000){
                 return seedMoney;
             }else {
                 System.out.println("올바른 금액을 입력하세요");
