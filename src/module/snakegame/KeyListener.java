@@ -5,11 +5,14 @@ import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 
-import java.util.Observable;
+//import java.util.Observable;
 
-public class KeyListener  extends Observable implements NativeKeyListener {
-    private static int lastKeyCode;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class KeyListener implements NativeKeyListener {
     private static KeyListener instance;
+    private final List<Observer> observers = new CopyOnWriteArrayList<>();
 
     // private 생성자로 외부에서의 인스턴스 생성 방지
     private KeyListener() {
@@ -31,25 +34,26 @@ public class KeyListener  extends Observable implements NativeKeyListener {
         return instance;
     }
 
-//    public KeyListener() {
-//        try {
-//            // JNativeHook 라이브러리 초기화 및 등록
-//            GlobalScreen.registerNativeHook();
-//        } catch (NativeHookException ex) {
-//            System.err.println("There was a problem registering the native hook.");
-//            System.err.println(ex.getMessage());
-//            System.exit(1);
-//        }
-//
-//        // 이벤트 리스너 등록
-//        GlobalScreen.addNativeKeyListener(this);
-//    }
+    // 옵저버 추가
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    //옵저버 제거
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    // 옵저버에게 알림 전달
+    private void notifyObservers(Object arg) {
+        for (Observer observer : observers) {
+            observer.update(arg);
+        }
+    }
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent e) {
-        lastKeyCode = e.getKeyCode();
-        setChanged();
-        notifyObservers(lastKeyCode);
+        notifyObservers(e.getKeyCode());
     }
 
     @Override

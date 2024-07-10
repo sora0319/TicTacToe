@@ -1,10 +1,7 @@
 package module.snakegame;
 
-import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.*;
 
 public class SnakeGameProcess implements Observer {
@@ -37,29 +34,27 @@ public class SnakeGameProcess implements Observer {
     private boolean isSpeedGame = true;
 
     @Override
-    public void update(Observable o, Object arg) {
-        if (o instanceof KeyListener) {
-            int keyCode = (int) arg;
+    public void update(Object arg) {
+        int keyCode = (int) arg;
 
-            if(keyCode == NativeKeyEvent.VC_UP && !direction.equals("DOWN")){
-                direction = "UP";
-            }
-            if(keyCode == NativeKeyEvent.VC_DOWN && !direction.equals("UP")){
-                direction = "DOWN";
-            }
-            if(keyCode == NativeKeyEvent.VC_LEFT && !direction.equals("RIGHT")){
-                direction = "LEFT";
-            }
-            if(keyCode == NativeKeyEvent.VC_RIGHT && !direction.equals("LEFT")){
-                direction = "RIGHT";
-            }
-            if(keyCode == NativeKeyEvent.VC_ESCAPE){
-                isUpdateGui = false;
-                isSpeedGame = false;
+        if(keyCode == NativeKeyEvent.VC_UP && !direction.equals("DOWN")){
+            direction = "UP";
+        }
+        if(keyCode == NativeKeyEvent.VC_DOWN && !direction.equals("UP")){
+            direction = "DOWN";
+        }
+        if(keyCode == NativeKeyEvent.VC_LEFT && !direction.equals("RIGHT")){
+            direction = "LEFT";
+        }
+        if(keyCode == NativeKeyEvent.VC_RIGHT && !direction.equals("LEFT")){
+            direction = "RIGHT";
+        }
+        if(keyCode == NativeKeyEvent.VC_ESCAPE){
+            isUpdateGui = false;
+            isSpeedGame = false;
 
-                System.out.println("ESC key pressed. Exiting...");
-                keyListener.removeHook();
-            }
+            System.out.println("ESC key pressed. Exiting...");
+            keyListener.removeHook();
         }
     }
 
@@ -312,6 +307,7 @@ public class SnakeGameProcess implements Observer {
         fruit[0] = fruitX;
         fruit[1] = fruitY;
     }
+
 
 
 }
