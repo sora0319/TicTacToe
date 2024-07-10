@@ -282,17 +282,18 @@ public class SnakeGameProcess implements Observer {
             snakeSpace[i] = temp[0] * tableY + temp[1];
         }
 
-        // table 각 가장자리 빼고 랜덤 수 생성
-        // ((25-2)*100)+100
+        // table 각 가장자리 빼고 랜덤 수 생성 x=25 y=50
+        // (((50-1)*25) - 50 +1) + 50
         int fruitX = 0;
         int fruitY = 0;
         int fruitSpace = 0;
         boolean spaceDuplicated = false;
 
         while(fruitX == 0 && fruitY == 0){
-            fruitSpace = random.nextInt((tableX-2)*tableY)+tableY;
+            fruitSpace = random.nextInt(((tableY-1)*tableX)-tableY+1)+tableY;
+
             for(int i : snakeSpace){
-                if(fruitSpace == i || fruitSpace % tableY == 0){
+                if(fruitSpace == i || fruitSpace % tableY == 0 || fruitSpace % tableY == (tableY-1)){
                     spaceDuplicated = true;
                     break;
                 }
