@@ -1,7 +1,7 @@
 package module.omok_jmr;
 
 public enum Color{
-    WHITE(0, "백돌", "○"), BLACK(1, "흑돌", "●");
+    WHITE(0, "백돌", "●"), BLACK(1, "흑돌", "○");
 
     private final int number;
     private final String name;

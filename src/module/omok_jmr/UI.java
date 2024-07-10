@@ -81,8 +81,20 @@ public class UI {
                 System.out.println("올바른 입력이 아닙니다. [ ex) 11 12 ] 와 같은 형태로 입력해야 합니다.");
                 continue;
             }
-
+            try {
+                locate[0] = Integer.parseInt(inputArr[0]);
+                locate[1] = Integer.parseInt(inputArr[1]);
+            }catch (NumberFormatException e){
+                System.out.print("숫자로 된 값만 입력해야 합니다.");
+                continue;
+            }
+            if (locate[0] < 0 || locate[0] >= 15 || locate[1] < 0 || locate[1] >= 15) {
+                System.out.println("0 부터 14 범위 안의 정수 값만 입력해야 합니다.");
+                continue;
+            }
+            break;
         }
+        return locate;
     }
 
 
