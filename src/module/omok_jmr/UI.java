@@ -1,5 +1,6 @@
 package module.omok_jmr;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class UI {
@@ -40,16 +41,16 @@ public class UI {
         }
         for (int i = 0; i < boardView.length; i++) {
             boardView[i][0] = "├";
-            boardView[i][boardView[0].length - 1] = "┤";
+            boardView[i][boardView[0].length-1] = "┤";
         }
         for (int j = 0; j < boardView[0].length; j++) {
             boardView[0][j] = "┬";
-            boardView[boardView.length - 1][j] = "┴";
+            boardView[boardView.length-1][j] = "┴";
         }
         boardView[0][0] = "┌";
-        boardView[0][boardView[0].length - 1] = "┐";
-        boardView[boardView.length - 1][0] = "└";
-        boardView[boardView.length - 1][boardView[0].length - 1] = "┘";
+        boardView[0][boardView[0].length-1] = "┐";
+        boardView[boardView.length-1][0] = "└";
+        boardView[boardView.length-1][boardView[0].length-1] = "┘";
 
         for (int i = 0; i < board.getBoard().length; i++) {
             for (int j = 0; j < board.getBoard()[0].length; j++) {
@@ -59,11 +60,17 @@ public class UI {
                 }
             }
         }
-
-        for (String[] row : boardView) {
-            for (int j = 0; j < row.length; j++) {
-                System.out.print(row[j]);
-                if (j == row.length - 1) continue;
+        System.out.println();
+        System.out.print("   ");
+        for (int i = 0; i < boardView.length; i++) {
+            System.out.printf("%-2d ", i);
+        }
+        System.out.println();
+        for (int i = 0; i < boardView.length; i++) {
+            System.out.printf("%2d ", i);
+            for (int j = 0; j < boardView[i].length; j++) {
+                System.out.print(boardView[i][j]);
+                if(j == boardView[i].length-1) continue;
                 System.out.print("--");
             }
             System.out.println();
@@ -76,14 +83,14 @@ public class UI {
             System.out.print(color.getName() + "이 둘 차례입니다. 착수할 위치를 입력해주세요 : ");
             String input = sc.nextLine();
             String[] inputArr = input.split(" ");
-            if (inputArr.length != 2) {
+            if(inputArr.length!=2){
                 System.out.println("올바른 입력이 아닙니다. [ ex) 11 12 ] 와 같은 형태로 입력해야 합니다.");
                 continue;
             }
             try {
                 locate[0] = Integer.parseInt(inputArr[0]);
                 locate[1] = Integer.parseInt(inputArr[1]);
-            } catch (NumberFormatException e) {
+            }catch (NumberFormatException e){
                 System.out.print("숫자로 된 값만 입력해야 합니다.");
                 continue;
             }
