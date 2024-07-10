@@ -3,7 +3,7 @@ package module.omok_jmr;
 public class Board {
     private final Stone[][] board;
 
-    public Board(){
+    public Board() {
         board = new Stone[15][15];
     }
 
