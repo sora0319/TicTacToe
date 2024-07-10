@@ -56,6 +56,9 @@ public class GameManager {
                 case 5:
                     playable = new SnakeGame(keyListener);
                     break;
+                case 7:
+                    playable = new OmokJMR();
+                    break;
                 case 0:
                     System.out.println("시스템을 종료 합니다.");
                     keyListener.unregisterHook();
