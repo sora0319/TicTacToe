@@ -56,7 +56,7 @@ public class GameManager {
                 case 5:
                     playable = new SnakeGame(keyListener);
                     break;
-                case 6:
+                case 7:
                     playable = new OmokJMR();
                     break;
                 case 0:

@@ -9,7 +9,7 @@ public enum GameList {
     BLACKJACK(3, "Blackjack"),
     NUMBER_BASEBALL(4, "NumberBaseball"),
     Snake_Game(5, "SnakeGame"),
-    OMOK_JMR(6, "Omok_JMR");
+    OMOK_JMR(7, "Omok_JMR");
 
 
     private final int num;
