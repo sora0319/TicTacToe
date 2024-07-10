@@ -60,11 +60,17 @@ public class UI {
                 }
             }
         }
-
-        for (String[] row : boardView) {
-            for (int j = 0; j < row.length; j++) {
-                System.out.print(row[j]);
-                if(j == row.length-1) continue;
+        System.out.println();
+        System.out.print("   ");
+        for (int i = 0; i < boardView.length; i++) {
+            System.out.printf("%-2d ", i);
+        }
+        System.out.println();
+        for (int i = 0; i < boardView.length; i++) {
+            System.out.printf("%2d ", i);
+            for (int j = 0; j < boardView[i].length; j++) {
+                System.out.print(boardView[i][j]);
+                if(j == boardView[i].length-1) continue;
                 System.out.print("--");
             }
             System.out.println();
