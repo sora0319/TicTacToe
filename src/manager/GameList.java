@@ -8,7 +8,7 @@ public enum GameList {
     HANOI(2, "Hanoi"),
     BLACKJACK(3, "Blackjack"),
     NUMBER_BASEBALL(4, "NumberBaseball"),
-    Snake_Game(5, "SnakeGame"),
+    SNAKE_GAME(5, "SnakeGame"),
     OMOK_JMR(7, "Omok_JMR");
 
 

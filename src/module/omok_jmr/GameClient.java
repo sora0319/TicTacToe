@@ -3,7 +3,7 @@ package module.omok_jmr;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameClient{
+public class GameClient {
 
     Board board = new Board();
     UI ui = new UI();
