@@ -143,3 +143,12 @@ src
   <img width="208" alt="Hanoi_start" src="https://github.com/OliveLover/TicTacToe/assets/128995184/89ad8f17-96ae-43d1-b15a-94bc4c2bc45f"> <br />
   <img width="208" alt="Hanoi_win" src="https://github.com/OliveLover/TicTacToe/assets/128995184/d0b11ba2-ce96-49aa-baea-c892d9295409">
 </div>
+<div>
+오목은 두 명의 플레이어가 번갈아가며 바둑판 위에 돌을 놓는 보드 게임입니다.<br/>
+게임의 목표는 가로, 세로 또는 대각선으로 다섯 개의 돌을 연속으로 놓는 것입니다.<br/>
+현재 어떠한 룰도 없는 1번 모드만 구현이 되어 있습니다.<br/>
+
+추후에 OOP 적으로 확장하여 일반룰과 렌주룰이 적용된 오목을 구현할 예정입니다.
+![Untitled (5).png](..%2F..%2F..%2F..%2FDownloads%2FUntitled%20%285%29.png)
+![Untitled (6).png](..%2F..%2F..%2F..%2FDownloads%2FUntitled%20%286%29.png)
+</div>
