@@ -149,6 +149,6 @@ src
 현재 어떠한 룰도 없는 1번 모드만 구현이 되어 있습니다.<br/>
 
 추후에 OOP 적으로 확장하여 일반룰과 렌주룰이 적용된 오목을 구현할 예정입니다.
-![Untitled (5).png](..%2F..%2F..%2F..%2FDownloads%2FUntitled%20%285%29.png)
-![Untitled (6).png](..%2F..%2F..%2F..%2FDownloads%2FUntitled%20%286%29.png)
+<img width="276" alt="Untitled (5)" src="https://github.com/user-attachments/assets/ef8aaf0e-0f27-4a95-9bcf-7e82e7211e5b">
+<img width="433" alt="Untitled (6)" src="https://github.com/user-attachments/assets/b7081c36-28cc-449e-b31f-f4ece5d53b8c">
 </div>
