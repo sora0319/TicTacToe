@@ -129,7 +129,7 @@ src
 
 <h4>1.2 TicTacToe Infinite Mode</h3>
 <div>
-  무한모드 TicTacToe는 기존 게임 규칙에 3개의 O와 X를 유지하게되며, 3개가 넘어가면 가장 나중에 입력된 O와 X가 사라지는 규칙이 추가되었습니다.
+  무한모드 TicTacToe는 기존 게임 규칙에 3개의 O와 X를 유지하게되며, 3개가 넘어가면 가장 나중에 입력된 O와 X가 사라지는 규칙이 추가되었습니다. <br />
 
   <img width="181" alt="image" src="https://github.com/OliveLover/TicTacToe/assets/118647313/8f5fc489-1317-464e-bdb9-90ffb7bf7553">
   <img width="127" alt="image" src="https://github.com/OliveLover/TicTacToe/assets/118647313/af895927-db7d-45b3-8333-cdc1722d5d3e">
@@ -148,7 +148,7 @@ src
 게임의 목표는 가로, 세로 또는 대각선으로 다섯 개의 돌을 연속으로 놓는 것입니다.<br/>
 현재 어떠한 룰도 없는 1번 모드만 구현이 되어 있습니다.<br/>
 
-추후에 OOP 적으로 확장하여 일반룰과 렌주룰이 적용된 오목을 구현할 예정입니다.
+추후에 OOP 적으로 확장하여 일반룰과 렌주룰이 적용된 오목을 구현할 예정입니다. <br />
 <img width="276" alt="Untitled (5)" src="https://github.com/user-attachments/assets/ef8aaf0e-0f27-4a95-9bcf-7e82e7211e5b">
 <img width="433" alt="Untitled (6)" src="https://github.com/user-attachments/assets/b7081c36-28cc-449e-b31f-f4ece5d53b8c">
 </div>
